@@ -24,7 +24,7 @@ const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
 const parts = github.context.ref.split("/");
-const branch = parts.at(-1);
+let branch = parts.at(-1);
 
 console.log(branch);
 
@@ -34,7 +34,8 @@ const pr = github.context.payload.pull_request;
 const type = github.context.payload.repository.private ? "private" : "public";
 const commitId = github.context.payload.after;
 const committer = github.context.actor;
-let branch = github.context.payload.pull_request?.base?.ref;
+
+branch = github.context.payload.pull_request?.base?.ref;
 let repoId = github.context.payload.pull_request?.head?.repo?.owner?.id;
 
 if (github.context.eventName === "push") {
