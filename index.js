@@ -32,6 +32,8 @@ console.log("6", github.context.payload.after)
 
 console.log("7", github.context.actor)
 console.log("8", github.context.ref)
+console.log("9", github.context.repo)
+
 
 
 
