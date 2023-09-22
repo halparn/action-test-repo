@@ -24,7 +24,7 @@ const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
 const parts = github.context.ref.split("/");
-branch = parts.at(-1);
+const branch = parts.at(-1);
 
 console.log(branch);
 
