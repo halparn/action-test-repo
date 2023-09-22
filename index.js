@@ -23,11 +23,16 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
-console.log("1", github)
-console.log("2", github.actor_id)
-console.log("3", github.actor)
-console.log("4", github.context)
-console.log("4", github.payload)
+console.log("2", github.context.payload)
+console.log("3", github.context.payload.head_commit)
+
+console.log("4", github.context.payload.comment)
+console.log("6", github.context.payload.after)
+
+
+console.log("7", github.context.actor)
+console.log("8", github.context.ref)
+
 
 
 const repoName = github.context.repo.repo;
