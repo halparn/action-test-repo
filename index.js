@@ -23,32 +23,23 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
-console.log("2", github.context.payload)
-console.log("3", github.context.payload.head_commit)
+const parts = github.context.ref.split("/");
+branch = parts.at(-1);
 
-console.log("4", github.context.payload.comment)
-console.log("6", github.context.payload.after)
-
-
-console.log("7", github.context.actor)
-console.log("8", github.context.ref)
-console.log("9", github.context.repo)
-console.log("10", github.context.payload.pull_request)
-
-
-
-
+console.log(branch);
 
 const repoName = github.context.repo.repo;
 const repoOwner = github.context.repo.owner;
 const pr = github.context.payload.pull_request;
 const type = github.context.payload.repository.private ? "private" : "public";
 const commitId = github.context.payload.after;
-let branch = github.context.payload.pull_request?.head.ref;
-let repoId = github.context.payload.pull_request?.head.repo.owner.id;
+const committer = github.context.actor;
+let branch = github.context.payload.pull_request?.base?.ref;
+let repoId = github.context.payload.pull_request?.head?.repo?.owner?.id;
 
 if (github.context.eventName === "push") {
-  branch = github.context.payload.repository.default_branch;
+  const parts = github.context.ref.split("/");
+  branch = parts.at(-1);
   repoId = github.context.payload.repository.id;
 }
 
@@ -91,7 +82,7 @@ const startScan = async () => {
           githubtoken: githubtoken,
           id: repoId,
           action: true,
-          commitId: commitId
+          commitId: commitId,
         },
         {
           headers: {
@@ -101,11 +92,11 @@ const startScan = async () => {
         }
       );
     } catch (error) {
-      throw new Error(error.response.data.message)
+      throw new Error(error.response.data.message);
     }
     return scanStarting;
   } catch (error) {
-    core.setFailed(error)
+    core.setFailed(error);
   }
 };
 
