@@ -23,17 +23,9 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
-console.log("2", github.context.payload);
-console.log("3", github.context.payload.head_commit);
+console.log("2", github.context.payload?.head_commit?.message);
+console.log("3", github.context.payload?.pull_request?.title);
 
-console.log("4", github.context.payload.comment);
-console.log("6", github.context.payload.after);
-
-console.log("7", github.context.actor); // committer burdan gelecek
-console.log("8", github.context.ref);
-console.log("9", github.context.repo);
-console.log("10", github.context.payload.pull_request);
-console.log("11", github.context.eventName);
 
 const repoName = github.context.repo.repo;
 const repoOwner = github.context.repo.owner;
