@@ -23,24 +23,30 @@ const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
 
-const parts = github.context.ref.split("/");
-let branch = parts.at(-1);
+console.log("2", github.context.payload);
+console.log("3", github.context.payload.head_commit);
 
-console.log(branch);
+console.log("4", github.context.payload.comment);
+console.log("6", github.context.payload.after);
+
+console.log("7", github.context.actor); // committer burdan gelecek
+console.log("8", github.context.ref);
+console.log("9", github.context.repo);
+console.log("10", github.context.payload.pull_request);
+console.log("11", github.context.eventName);
 
 const repoName = github.context.repo.repo;
 const repoOwner = github.context.repo.owner;
 const pr = github.context.payload.pull_request;
 const type = github.context.payload.repository.private ? "private" : "public";
 const commitId = github.context.payload.after;
-const committer = github.context.actor;
-
-branch = github.context.payload.pull_request?.base?.ref;
+const committer = github.context.actor
+let branch = github.context.payload.pull_request?.base?.ref;
 let repoId = github.context.payload.pull_request?.head?.repo?.owner?.id;
 
 if (github.context.eventName === "push") {
   const parts = github.context.ref.split("/");
-  branch = parts.at(-1);
+  branch = github.context.ref;
   repoId = github.context.payload.repository.id;
 }
 
