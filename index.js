@@ -22,6 +22,8 @@ const ctServer = process.env.CT_SERVER;
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const orgname = process.env.ORGNAME;
+const fart = process.env.ORGNAME;
+
 
 console.log("2", github.context.payload?.head_commit?.message);
 console.log("3", github.context.payload?.pull_request?.title);
