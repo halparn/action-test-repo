@@ -4,6 +4,8 @@ const countAndGroupByTitle = (arr) => {
   const result = [];
   arr.forEach((obj) => {
     const title = obj.issue_state.weakness_id;
+    const titler = obj.issue_state.weakness_id;
+
     const severity = obj.issue_state.severity;
     if (!result.find((o) => o.title === title)) {
       result.push({
